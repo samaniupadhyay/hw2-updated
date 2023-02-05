@@ -268,8 +268,17 @@ puts ""
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
 
+movies = Movie.all
+studios = Studio.all
 
-
+for movie in movies
+title = movie["title"]
+year_released = movie["year_released"]
+rated = movie["rated"]
+studio_id= Studio.find_by({"id" => movie["studio_id"]})
+studio_name = studio_id["name"]
+puts "#{title} #{year_released} #{studio_name}"
+end
 
 # Prints a header for the cast output
 puts ""
@@ -279,3 +288,17 @@ puts ""
 
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
+
+roles = Role.all
+actors = Actor.all
+
+for role in roles
+    movie_id = Movie.find_by({"id" => role["movie_id"]})
+    actor_id = Actor.find_by({"id" => role["actor_id"]})
+    movie_title = movie_id["title"]
+    actor_name = actor_id["name"]
+    actor_character = role["character_name"]
+    puts "#{movie_title} #{actor_name} #{actor_character}"
+end
+
+
